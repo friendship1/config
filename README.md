@@ -169,4 +169,16 @@ AllowedIPs = 10.19.49.0/24, 114.71.0.0/16
 Endpoint = *
 PersistentKeepalive = 25 
 ```
+
+## etc (apt install stuffs)
+```sh
+sudo apt update
+sudo apt install \
+    iftop \
+    vim \
+    net-tools \
+    tig
+```
+
+
 .
