@@ -122,7 +122,51 @@ cd bashmarks
 make install
 ```
 
+## algo
+https://github.com/trailofbits/algo/blob/master/docs/client-linux-wireguard.md
 
+```sh
+# Update your system:
+sudo apt update && sudo apt upgrade
 
+# If the file /var/run/reboot-required exists then reboot:
+[ -e /var/run/reboot-required ] && sudo reboot
 
+# Install WireGuard:
+sudo apt install wireguard openresolv
+```
+```sh
+# Install the config file to the WireGuard configuration directory on your
+# Linux client:
+sudo install -o root -g root -m 600 <username>.conf /etc/wireguard/wg0.conf
+
+# Start the WireGuard VPN:
+sudo systemctl start wg-quick@wg0
+
+# Check that it started properly:
+sudo systemctl status wg-quick@wg0
+
+# Verify the connection to the AlgoVPN:
+sudo wg
+
+# See that your client is using the IP address of your AlgoVPN:
+curl ipv4.icanhazip.com
+
+# Optionally configure the connection to come up at boot time:
+sudo systemctl enable wg-quick@wg0
+```
+
+```
+[Interface] 
+PrivateKey = * 
+Address = 10.19.49.99
+DNS = 172.?.?.?
+ 
+[Peer] 
+PublicKey = * 
+PresharedKey = * 
+AllowedIPs = 10.19.49.0/24, 114.71.0.0/16 
+Endpoint = *
+PersistentKeepalive = 25 
+```
 .
